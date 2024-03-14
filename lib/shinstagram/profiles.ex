@@ -11,8 +11,8 @@ defmodule Shinstagram.Profiles do
   alias Shinstagram.Utils
   require Logger
 
-  @model "gpt-4"
-  @dumb_model "gpt-3.5-turbo"
+  @model "qwen-turbo"
+  @dumb_model "qwen-turbo"
 
   def reset_all_pids do
     from(p in Profile)

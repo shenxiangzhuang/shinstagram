@@ -21,12 +21,12 @@ if System.get_env("PHX_SERVER") do
 end
 
 config :openai,
-  api_key: System.fetch_env!("OPENAI_API_KEY"),
-  organization_key: System.fetch_env!("OPENAI_ORG"),
+  api_key: System.get_env("OPENAI_API_KEY", ""),
+  organization_key: System.get_env("OPENAI_ORG", ""),
   http_options: [recv_timeout: 60_000, timeout: 60_000]
 
 config :replicate,
-  replicate_api_token: System.fetch_env!("REPLICATE_API_TOKEN")
+  replicate_api_token: System.get_env("REPLICATE_API_TOKEN", "")
 
 config :ex_aws,
   access_key_id: System.get_env("CLOUDFLARE_ACCESS_KEY_ID"),
@@ -36,6 +36,11 @@ config :ex_aws,
     host: "f8cf3fdd7d34cbe87d92a631b818efa1.r2.cloudflarestorage.com",
     region: "us-east-1"
   ]
+
+config :tencent_cloud_cos,
+  secret_id: "A...x",
+  secret_key: "M...m"
+
 
 if config_env() == :prod do
   database_url =

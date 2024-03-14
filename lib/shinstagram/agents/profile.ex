@@ -3,14 +3,15 @@ defmodule Shinstagram.Agents.Profile do
   """
   use GenServer, restart: :transient
   alias Shinstagram.Timeline
-  import AI
+  # import AI
+  import Qwen.Sigils
   import Shinstagram.AI
   alias Shinstagram.Profiles
 
   # what our agent likes doing
   @actions_probabilities [{:post, 0.7}, {:look, 0.2}, {:sleep, 0.1}]
   # how fast our agent thinks
-  @cycle_time 1000
+  @cycle_time 3000
   # channel that agents subscribe to
   @channel "feed"
 
@@ -96,6 +97,11 @@ defmodule Shinstagram.Agents.Profile do
     {:ok, text}
   end
 
+  defp broadcast({:error, error_info}, {event, emoji, message}, profile) do
+    broadcast({event, emoji, message}, profile)
+    {:ok, "hello, world: #{error_info}"}
+  end
+
   # 🧠 The pre-frontal cortex
   defp evaluate(profile, post) do
     broadcast({:thought, "👀", "I'm evaluating post:#{post.id}"}, profile)
@@ -103,9 +109,9 @@ defmodule Shinstagram.Agents.Profile do
 
     {:ok, result} =
       ~l"""
-      model: gpt-3.5-turbo
+      model: qwen-turbo
       system: You are a user on a photo sharing social site (called shinstagram).
-      Here's some information about you:
+      user: Here's some information about you:
       - Your username is #{profile.username}.
       - Your profile summary is #{profile.summary}.
       - Your vibe is #{profile.vibe}.
