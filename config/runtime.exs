@@ -38,8 +38,8 @@ config :ex_aws,
   ]
 
 config :tencent_cloud_cos,
-  secret_id: "A...x",
-  secret_key: "M...m"
+  secret_id: System.get_env("TENCENT_COS_SECRET_ID"),
+  secret_key:  System.get_env("TENCENT_COS_SECRET_KEY")
 
 
 if config_env() == :prod do
