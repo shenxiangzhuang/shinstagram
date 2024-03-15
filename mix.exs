@@ -56,7 +56,9 @@ defmodule Shinstagram.MixProject do
       {:ex_aws_s3, "~> 2.0"},
       {:timex, "~> 3.0"},
       {:ai, "~> 0.3.4"},
-      {:req, "~> 0.4.3"}
+      {:qwen, "~> 0.2.2"},
+      {:req, "~> 0.4.3"},
+      {:tencent_cloud_cos, "~> 0.1.1"}
     ]
   end
 

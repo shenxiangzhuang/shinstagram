@@ -4,16 +4,17 @@ defmodule Shinstagram.Timeline do
   """
 
   import Ecto.Query, warn: false
-  import AI
+  # import AI
   import Shinstagram.AI
   alias Shinstagram.Repo
+  import Qwen.Sigils
 
   alias Shinstagram.Profiles.Profile
   alias Shinstagram.Timeline.{Post, Like}
   require Logger
 
-  @model "gpt-4"
-  @dumb_model "gpt-3.5-turbo"
+  @model "qwen-turbo"
+  @dumb_model "qwen-turbo"
 
   def log(message) do
     Logger.info(message)
